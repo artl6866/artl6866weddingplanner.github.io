@@ -1,0 +1,40 @@
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+@model ViewWedding
+<h1>Plan Your Wedding</h1>
+<a href="/dashboard">Dashboard</a> <a href ="/logout">Logout</a>
+<br>
+<br>
+<form asp-action="CreateWedding" asp-controller="Home" method="post">
+    <div class="form-group col-md-8">
+        <span asp-validation-for="WedderOne"></span>
+        <label asp-for="WedderOne">Wedder One</label>
+        <input asp-for="WedderOne" >
+    </div>
+    <br>
+    <br>
+    <div class="form-group col-md-8">
+        <span asp-validation-for="WedderTwo"></span>
+        <label asp-for="WedderTwo">Wedder Two</label>
+        <input asp-for="WedderTwo" >
+    </div>
+    <br>
+    <br>
+    <div class="form-group col-md-8">
+        <span asp-validation-for="Date"></span>
+        <label asp-for="Date">Date</label>
+        <input asp-for="Date">
+    </div>
+    <br>
+    <br>
+    <div class="form-group col-md-8">
+        <span asp-validation-for="Address"></span>
+        <label asp-for="Address">Wedding Address</label>
+        <input asp-for="Address">
+    </div>
+    <br>
+    <br>
+    <br>
+    <button>Create</button>
+</form>

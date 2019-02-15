@@ -1,0 +1,65 @@
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+@{
+    ViewData["Title"] = "Home Page";
+}
+@model wedding.Models.Dashboard
+@using wedding.Models
+<h1>Welcome to the Wedding Planner</h1> 
+<a href ="/logout">Logout</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Wedding</th>
+      <th scope="col">Date</th>
+      <th scope="col">Guest</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+   @foreach (var wedding in @ViewBag.allWeddings)
+   {
+    <tr>
+      <td><a href ="show/@wedding.WeddingId">@wedding.WedderOne & @wedding.WedderTwo</a></td>
+      <td>@wedding.Date.ToString("D")</td>
+      <td>@wedding.Guests.Count</td>
+      @{
+        if(@ViewBag.UserId == @wedding.UserId){
+        <td><a href="Delete/@wedding.WeddingId">Delete</a></td>
+        }
+        else 
+        {
+          if(@wedding.Guests.Count == 0)
+          {
+            <td><a href ="rsvp/@wedding.WeddingId">RSVP</a></td>
+          }
+          else
+          {
+            int Count = 0;
+            @foreach(var guest in @wedding.Guests)
+            {
+              @if(@guest.Users == @ViewBag.CurrentUser)
+              {
+                Count = 1;
+
+              }
+            }
+            if (Count == 1)
+            {
+            <td><a href="unrsvp/@wedding.WeddingId">UnRSVP</a></td>
+            }
+            else
+            {
+              <td><a href ="rsvp/@wedding.WeddingId">RSVP</a></td>
+            }
+          }
+        }  
+      }
+    </tr>
+  
+        
+   }
+  </tbody>
+</table>
+<a href="/addWedding">New Wedding</a>
